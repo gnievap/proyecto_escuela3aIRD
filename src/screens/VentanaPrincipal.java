@@ -10,6 +10,11 @@ public class VentanaPrincipal extends JFrame {
     private JMenuBar menuBar; // Barra de menú
     private JMenu menuAlumnos; // Menú Alumnos
     private JMenuItem menuInsertarAlumnos; // Elemento Insertar
+    private JMenuItem menuVerAlumnos;
+    private JMenuItem menuEliminarAlumnos;
+
+    private JMenu menuBachilleratos; // Menú Bachilleratos
+    private JMenuItem menuVerBachilleratos;
 
     public VentanaPrincipal(String title){
         this.setTitle(title);
@@ -25,13 +30,32 @@ public class VentanaPrincipal extends JFrame {
         menuAlumnos = new JMenu();
         menuAlumnos.setText("Alumnos");
 
-        // menu Insertar
+        // menu Insertar Alumnos
         menuInsertarAlumnos = new JMenuItem();
         menuInsertarAlumnos.setText("Insertar...");
 
-        // Agregando menu
+        // menu Ver Alumnos
+        menuVerAlumnos = new JMenuItem("Ver todos los alumnos...");
+
+        // menu Eliminar Alumnos
+        menuEliminarAlumnos = new JMenuItem("Dar de baja alumno...");
+
+        // menu Bachilleratos
+        menuBachilleratos = new JMenu();
+        menuBachilleratos.setText("Bachilleratos");
+        // menu Ver Bachilleratos
+        menuVerBachilleratos = new JMenuItem("Ver todos los bachilleratos...");
+
+
+        // Agregando menu Alumnos
+        menuAlumnos.add(menuVerAlumnos);
         menuAlumnos.add(menuInsertarAlumnos);
+        menuAlumnos.add(menuEliminarAlumnos);
         menuBar.add(menuAlumnos);
+
+        // Agregando menu Bachilleratos
+        menuBachilleratos.add(menuVerBachilleratos);
+        menuBar.add(menuBachilleratos);
       
         this.setJMenuBar(menuBar); // menuBar es la única barra del JFrame
 
