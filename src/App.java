@@ -3,7 +3,8 @@ import screens.VentanaPrincipal;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        
+
+        //Solo para asegurar que la apariencia sea consistente en Windows
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
