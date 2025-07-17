@@ -1,5 +1,7 @@
 package screens;
 
+import java.sql.Connection;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,7 +18,10 @@ public class VentanaPrincipal extends JFrame{
     private JMenuItem jMenuItemInsertarCarreras;
     private JMenuItem jMenuItemVerCarreras;
 
-    public VentanaPrincipal(String title){
+    private Connection conn;
+
+    public VentanaPrincipal(String title, Connection conn){
+        this.conn = conn;
         this.setTitle(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
@@ -70,7 +75,7 @@ public class VentanaPrincipal extends JFrame{
 
     private void jmiInsertarCarreras(){
        //Crear un objeto de tipo JInternalFrame
-        JInternalFrameInsertarCarrera insertarCarrera = new JInternalFrameInsertarCarrera();
+        JInternalFrameInsertarCarrera insertarCarrera = new JInternalFrameInsertarCarrera(this.conn);
         
         //Agregar el internalFrame al escritorio
         this.desktop.add(insertarCarrera);
