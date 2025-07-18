@@ -7,7 +7,11 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import models.Carrera;
+import models.CarreraDAO;
 
 public class JInternalFrameInsertarCarrera extends JInternalFrame{
     private JLabel lblId;
@@ -91,6 +95,51 @@ public class JInternalFrameInsertarCarrera extends JInternalFrame{
                 )
         );
     }
+   
+    private void insertarCarrera() {
+        int rows;
+
+        //1. Recuperar datos de las cajas de texto
+        int id = Integer.parseInt(txtId.getText());
+        String nombre = txtNombreCarrera.getText();
+        double monto = Double.parseDouble(txtMonto.getText());
+
+        // 2. Revisar que los campos no estén vacíos
+        if (id <= 0 || nombre.isEmpty() || monto <= 0) {
+            JOptionPane.showMessageDialog(this, 
+                "Por favor, complete todos los campos correctamente.", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else{
+            //3. Crear un objeto Carrera
+            Carrera carrera = new Carrera(id, nombre, monto);
+            
+            //4. Crear un objeto CarreraDAO
+            CarreraDAO carreraDAO = new CarreraDAO(this.conn);
+            
+            // 5. Insertar la carrera en la base de datos
+            rows = carreraDAO.insertarCarrera(carrera);
+            
+            if (rows > 0) {
+                JOptionPane.showMessageDialog(this, 
+                    "Carrera insertada correctamente.", 
+                    "Éxito", 
+                    JOptionPane.INFORMATION_MESSAGE);
+                txtId.setText(""); // Limpiar campos
+                txtNombreCarrera.setText("");
+                txtMonto.setText("");
+                this.dispose(); // Cerrar el internal frame
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "Error al insertar la carrera.", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+    } 
     
 }
 
